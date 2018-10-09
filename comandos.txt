@@ -1,0 +1,37 @@
+Make
+ php bin/console make:controller
+ php bin/console make:migration
+ php bin/console doctrine:migrations:migrate
+ php bin/console make:entity --regenerate
+ bin/console make:crud
+ bin/console make:form
+Update npm
+    npm i npm
+
+Install Bootstrap
+    npm i bootstrap-loader -D
+
+Install jquery
+yarn add jquery --dev
+npm install jquery
+yarn add popper.js
+yarn add tooltip.js
+
+Webpack Encore
+    ./node_modules/.bin/encore dev
+    ./node_modules/.bin/encore dev --watch
+    ./node_modules/.bin/encore production
+
+    yarn run encore dev
+    yarn run encore dev --watch
+    yarn run encore production
+
+Using Bootstrap CSS & JS
+    yarn add bootstrap-sass --dev
+
+
+Limpiar cache para refrescar traducciones
+php bin/console cache:clear
+
+Validar la sintaxis de los twigs
+php bin/console lint:twig templates

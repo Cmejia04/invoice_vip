@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Hello, world Jeenson!</h1>
+    <h1>Total de Events {{ events|length }}</h1>
+    {% for event in events  %}
+        <li>{{ event.name }} in {{ event.location }}: $<strong>{{ event.price }}</strong></li>
+    {% endfor %}
+{% endblock %}

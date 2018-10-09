@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}{{ ' - ' ~ app_name }}</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block stylesheets %}
+            <!-- Bootstrap CSS -->
+            <link href="{{ asset('build/css/app.css') }}" rel="stylesheet" />
+        {% endblock %}
+
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                {% if app.user %}
+                    {% block menu %}
+                        {% include 'menu.html.twig' %}
+                    {% endblock %}
+                {% endif %}
+            </div>
+
+            <div id="messages-flash">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div id="content">
+                {% block body %}{% endblock %}
+            </div>
+
+            <div class="footer">
+                {% block footer %}{% endblock %}
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
