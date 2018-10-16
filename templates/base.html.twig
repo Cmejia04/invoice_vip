@@ -10,16 +10,28 @@
             <!-- Bootstrap CSS -->
             <link href="{{ asset('build/css/app.css') }}" rel="stylesheet" />
         {% endblock %}
-
-
     </head>
     <body>
         <div class="container">
-            <div class="header">
+            <div class="header m_t20">
+                <div class="row">
+                    <div class="col-md-11 text-right">
+                        {{ app.user.email }}
+                    </div>
+                    <div class="">
+                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Salir</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                </div>
+
                 {% if app.user %}
-                    {% block menu %}
-                        {% include 'menu.html.twig' %}
-                    {% endblock %}
+                    <div class="row">
+                        {% block menu %}
+                            {#{% include 'menu.html.twig' %}#}
+                        {% endblock %}
+                    </div>
                 {% endif %}
             </div>
 
