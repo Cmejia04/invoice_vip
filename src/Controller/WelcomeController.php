@@ -31,7 +31,7 @@ class WelcomeController extends Controller
     public function __invoke(Request $request) : Response
     {
         return new Response(
-            $this->twig->render('home/list.html.twig')
+            $this->twig->render('home/index.html.twig')
         );
     }
 
