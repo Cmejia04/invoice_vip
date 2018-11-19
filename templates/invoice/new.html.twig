@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ "Create"|title }} {% endblock %}
+
+{% block content %}
+
+    <hr>
+    <h1 class="my-5">Registro de Facturas</h1>
+    <hr>
+
+    <h4 class="my-2">Información general</h4>
+
+    <form action="#">
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="">Seleccione la empresa con la que realizaste la compra</label>
+                <select name="company" id="company" class="form-control">
+                    <option value="">Seleccionar</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="">Número de factura de compra</label>
+                <input type="text" class="form-control" placeholder="Número Factura">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="">Desgloce de Factura</label>
+                <select name="company" id="company" class="form-control">
+                    <option value="">Seleccionar</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="">Fecha de compra de factura</label>
+                <input type="date" class="form-control" placeholder="Fecha compra de Factura">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="">Cantidad total de unidades de la factura</label>
+                <input type="text" class="form-control" placeholder="Cantidad total de unidades de la factura">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="">Total del monto en pesos de la unidad de negocios seleccionada</label>
+                <input type="text" class="form-control" placeholder="$">
+            </div>
+            <div class="form-group col-sm-12">
+                <label for="">Adjunta factura si el monto es igual o mayor a $100,000MXD (PDF, JPG, PNG)</label>
+                <input type="file" class="form-control-file">
+            </div>
+
+            <button type="submit" class="btn btn-primary my-3 float-right">Guardar</button>
+        </div>
+    </form>
+
+{% endblock %}

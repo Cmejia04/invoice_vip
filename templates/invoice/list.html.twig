@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ "List"|title }} {% endblock %}
+
+{% block content %}
+
+    <hr>
+    <h1 class="my-5">Mis facturas</h1>
+
+    <div class="row">
+
+        <h4 class="col-lg-12 col-md-12">Buscar</h4>
+        <hr>
+
+        <form action="#" class="col-md-12">
+            <div class="form-row">
+                <div class="col">
+                    <label for="keyword">Palabra Clave</label>
+                    <input type="text" class="form-control" placeholder="Palabra Clave" />
+                </div>
+                <div class="col">
+                    <label for="distributor">Distribuidor</label>
+                    <select name="distributor" id="distributor" class="form-control">
+                        <option value="">Seleccionar</option>
+                        <option value="1">HP Inc</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group text-xl-right">
+                <button type="submit" class="btn btn-primary my-2">Buscar</button>
+                <button type="button" class="btn btn-secondary my-2">Limpiar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Compañía</th>
+                <th scope="col">Tipo Partner</th>
+                <th scope="col">No. de Factura</th>
+                <th scope="col">Unidades</th>
+                <th scope="col">Total de Factura</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">VIP_MX_00019</th>
+                <td>Optime Consulting</td>
+                <td>Optime</td>
+                <td>7412365-1</td>
+                <td>150</td>
+                <td>${{ '500000'|number_format }}</td>
+                <td>Pendiente por aprobar</td>
+                <td>
+                    <div class="form-group">
+                        <select class="from-control">
+                            <option value="">Seleccionar</option>
+                            <option value="">Editar</option>
+                            <option value="">Eliminar</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">VIP_MX_00018</th>
+                <td>Optime Consulting</td>
+                <td>Optime</td>
+                <td>8529635-1</td>
+                <td>186</td>
+                <td>${{ '890000'|number_format }}</td>
+                <td>Aprobada</td>
+                <td>
+                    <div class="form-group">
+                        <select class="from-control">
+                            <option value="">Seleccionar</option>
+                            <option value="">Ver Detalle</option>
+                            <option value="">Eliminar</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">VIP_MX_00017</th>
+                <td>Optime Consulting</td>
+                <td>Optime</td>
+                <td>2635789-1</td>
+                <td>120</td>
+                <td>${{ '634000'|number_format }}</td>
+                <td>Aprobada</td>
+                <td>
+                    <div class="form-group">
+                        <select class="from-control">
+                            <option value="">Seleccionar</option>
+                            <option value="">Ver Detalle</option>
+                            <option value="">Eliminar</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">VIP_MX_00016</th>
+                <td>Optime Consulting</td>
+                <td>Optime</td>
+                <td>2017201-1</td>
+                <td>86</td>
+                <td>${{ '120000'|number_format }}</td>
+                <td>Aprobada</td>
+                <td>
+                    <div class="form-group">
+                        <select class="from-control">
+                            <option value="">Seleccionar</option>
+                            <option value="">Ver Detalle</option>
+                            <option value="">Eliminar</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -18,6 +18,7 @@
         "bootstrap-sass": "^3.3.7",
         "jquery": "^3.3.1",
         "npm": "^6.4.1",
-        "popper.js": "^1.14.3"
+        "popper.js": "^1.14.3",
+        "startbootstrap-modern-business": "^4.1.1"
     }
 }
