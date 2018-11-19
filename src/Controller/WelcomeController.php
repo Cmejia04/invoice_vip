@@ -31,7 +31,7 @@ class WelcomeController extends Controller
     public function __invoke(Request $request) : Response
     {
         return new Response(
-            $this->twig->render('home/index.html.twig')
+            $this->twig->render('home/index.html.twig', [ 'username' => $this->getUser()->getUsername() ])
         );
     }
 
@@ -42,14 +42,6 @@ class WelcomeController extends Controller
     {
         $events = $em->getRepository(Event::class)->findAllData();
         return $this->render('home/index.html.twig', compact('events'));
-    }
-
-    /**
-     * @Route("/list/{page<\d+>?1}", name="welcome.list")
-     */
-    public function list($page) : Response
-    {
-        return $this->render('home/list.html.twig');
     }
 
     /**
