@@ -17,6 +17,16 @@ npm install jquery
 yarn add popper.js
 yarn add tooltip.js
 
+
+*****************
+
+yarn add @symfony/webpack-encore --dev
+yarn add sass-loader node-sass --dev
+yarn run encore dev
+
+************
+
+
 Webpack Encore
     ./node_modules/.bin/encore dev
     ./node_modules/.bin/encore dev --watch
