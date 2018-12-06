@@ -30,6 +30,9 @@ class WelcomeController extends Controller
      */
     public function __invoke(Request $request) : Response
     {
+        if ( null === $this->getUser() ) {
+            return $this->redirectToRoute('fos_user_security_login');
+        }
         return new Response(
             $this->twig->render('home/index.html.twig', [ 'username' => $this->getUser()->getUsername() ])
         );
