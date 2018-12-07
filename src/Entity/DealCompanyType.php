@@ -9,6 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DealCompanyType
 {
+    const DISTRIBUTOR = 1;
+    const OPTIME = 3;
+    const MANUFACTURER = 4;
+    const PLATINUM = 13;
+    const SILVER = 14;
+    const GOLD = 15;
+    const HP_BUSINESS_PARTNER = 16;
+    const RESELLER = 17;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

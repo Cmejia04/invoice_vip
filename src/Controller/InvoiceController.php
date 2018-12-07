@@ -8,7 +8,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Deal;
+use App\Form\DealType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,8 +33,15 @@ class InvoiceController extends Controller
     /**
      * @Route("/new", name="invoice.new")
      */
-    public function new() : Response
+    public function new(Request $request) : Response
     {
-        return $this->render('invoice/new.html.twig', [ 'username' => $this->getUser()->getUsername() ]);
+        $form = $this->createForm(DealType::class);
+
+        $form->handleRequest($request);
+
+        return $this->render('invoice/new.html.twig', [
+            'username'  => $this->getUser()->getUsername(),
+            'form'      => $form->createView(),
+        ]);
     }
 }
