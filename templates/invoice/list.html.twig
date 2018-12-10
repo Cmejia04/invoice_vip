@@ -29,6 +29,7 @@
             <div class="form-group text-xl-right">
                 <button type="submit" class="btn btn-primary my-2">Buscar</button>
                 <button type="button" class="btn btn-secondary my-2">Limpiar</button>
+                <a href="{{ path('home') }}" class="btn btn-default my-2">Volver</a>
             </div>
         </form>
     </div>
@@ -48,78 +49,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">VIP_MX_00019</th>
-                <td>Optime Consulting</td>
-                <td>Optime</td>
-                <td>7412365-1</td>
-                <td>150</td>
-                <td>${{ '500000'|number_format }}</td>
-                <td>Pendiente por aprobar</td>
-                <td>
-                    <div class="form-group">
-                        <select class="from-control">
-                            <option value="">Seleccionar</option>
-                            <option value="">Editar</option>
-                            <option value="">Eliminar</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">VIP_MX_00018</th>
-                <td>Optime Consulting</td>
-                <td>Optime</td>
-                <td>8529635-1</td>
-                <td>186</td>
-                <td>${{ '890000'|number_format }}</td>
-                <td>Aprobada</td>
-                <td>
-                    <div class="form-group">
-                        <select class="from-control">
-                            <option value="">Seleccionar</option>
-                            <option value="">Ver Detalle</option>
-                            <option value="">Eliminar</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">VIP_MX_00017</th>
-                <td>Optime Consulting</td>
-                <td>Optime</td>
-                <td>2635789-1</td>
-                <td>120</td>
-                <td>${{ '634000'|number_format }}</td>
-                <td>Aprobada</td>
-                <td>
-                    <div class="form-group">
-                        <select class="from-control">
-                            <option value="">Seleccionar</option>
-                            <option value="">Ver Detalle</option>
-                            <option value="">Eliminar</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">VIP_MX_00016</th>
-                <td>Optime Consulting</td>
-                <td>Optime</td>
-                <td>2017201-1</td>
-                <td>86</td>
-                <td>${{ '120000'|number_format }}</td>
-                <td>Aprobada</td>
-                <td>
-                    <div class="form-group">
-                        <select class="from-control">
-                            <option value="">Seleccionar</option>
-                            <option value="">Ver Detalle</option>
-                            <option value="">Eliminar</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
+            {% for deal in deals %}
+                <tr>
+                    <th scope="row">{{ deal.id }}</th>
+                    <td>{{ deal.dealInvoice.dealCompany.name }}</td>
+                    <td>{{ deal.dealInvoice.dealCompany.dealCompanyType.name }}</td>
+                    <td>{{ deal.dealInvoice.invoiceNumber }}</td>
+                    <td>{{ deal.dealInvoice.totalUnits }}</td>
+                    <td>${{ deal.totalUsd|number_format }}</td>
+                    <td>{{ deal.dealStatus.name }}</td>
+                    <td>
+                        <div class="form-group">
+                            <select class="from-control">
+                                <option value="">Seleccionar</option>
+                                <option value="">Editar</option>
+                                <option value="">Eliminar</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

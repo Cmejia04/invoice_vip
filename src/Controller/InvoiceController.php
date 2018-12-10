@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Deal;
+use App\Entity\DealStatus;
 use App\Form\DealType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,12 @@ class InvoiceController extends Controller
      */
     public function list($page) : Response
     {
-        return $this->render('invoice/list.html.twig', [ 'username' => $this->getUser()->getUsername() ]);
+        $deals = $this->getDoctrine()->getRepository(Deal::class)->findAll();
+
+        return $this->render('invoice/list.html.twig', [
+            'username' => $this->getUser()->getUsername(),
+            'deals' => $deals,
+        ]);
     }
 
     /**
@@ -38,6 +44,20 @@ class InvoiceController extends Controller
         $form = $this->createForm(DealType::class);
 
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var Deal $deal */
+            $deal = $form->getData();
+
+            $deal->setDealStatus($this->getDoctrine()->getRepository(DealStatus::class)->findOneBy(['id' => DealStatus::PENDING]));
+
+            $em->persist($deal);
+            $em->flush();
+
+            return $this->redirectToRoute('invoice.list');
+        }
 
         return $this->render('invoice/new.html.twig', [
             'username'  => $this->getUser()->getUsername(),

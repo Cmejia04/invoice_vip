@@ -220,4 +220,11 @@ class DealInvoice
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getInvoiceNumber();
+    }
+
+
 }
