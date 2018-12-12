@@ -45,6 +45,7 @@
                 <th scope="col">Unidades</th>
                 <th scope="col">Total de Factura</th>
                 <th scope="col">Estatus</th>
+                <th scope="col">File Invoice</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
@@ -58,6 +59,7 @@
                     <td>{{ deal.dealInvoice.totalUnits }}</td>
                     <td>${{ deal.totalUsd|number_format }}</td>
                     <td>{{ deal.dealStatus.name }}</td>
+                    <td><a href="{{ vich_uploader_asset(deal.dealInvoice, 'fileInvoice') }}" target="_blank">Ver</a></td>
                     <td>
                         <div class="form-group">
                             <select class="from-control">

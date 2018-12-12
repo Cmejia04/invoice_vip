@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class DealInvoiceType extends AbstractType
 {
@@ -61,6 +62,10 @@ class DealInvoiceType extends AbstractType
             ])
             ->add("totalQuantity", NumberType::class, [
                 'scale' => 2,
+            ])
+            ->add("fileInvoice", VichFileType::class, [
+                'required' => true,
+                'allow_delete' => true,
             ])
         ;
     }
