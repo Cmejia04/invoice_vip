@@ -2,35 +2,39 @@
 /**
  * Created by PhpStorm.
  * User: CMEJIA
- * Date: 7/12/2018
- * Time: 11:33 AM
+ * Date: 13/12/2018
+ * Time: 4:01 PM
  */
 
 namespace App\Form;
 
 
-use App\Entity\BusinessUnit;
 use App\Entity\DealCompany;
 use App\Entity\DealCompanyType;
-use App\Entity\DealInvoice;
 use App\Entity\DealStatus;
-use App\EventSubscriber\AddFileInvoinceSubscriber;
 use Doctrine\ORM\EntityRepository;
+use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class DealInvoiceType extends AbstractType
+class FilterListType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("dealCompany", EntityType::class, [
+            ->add("keyword", TextType::class, [
+                'label' => "Palabra Clave",
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'required' => false,
+            ])
+            ->add("distributor", EntityType::class, [
                 'class' => DealCompany::class,
                 'placeholder' => "Selecciona una compañia",
                 'query_builder' => function (EntityRepository $entityRepository) {
@@ -42,35 +46,32 @@ class DealInvoiceType extends AbstractType
                             'companyTypes' => [ DealCompanyType::DISTRIBUTOR, DealCompanyType::MANUFACTURER ],
                             'status' => DealStatus::ACTIVE
                         ])
-                    ;
+                        ;
                 },
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'required' => false,
             ])
-            ->add("invoiceNumber", TextType::class)
-            ->add("businessUnit", EntityType::class, [
-                'class' => BusinessUnit::class,
-                'placeholder' => 'Selecciona una unidad de negocio',
-                'query_builder' => function (EntityRepository $entityRepository) {
-                    return $entityRepository
-                        ->createQueryBuilder('bu')
-                        ->where('bu.active = 1')
-                        ->orderBy('bu.name')
-                    ;
-                },
+            ->add('search', SubmitType::class, [
+                'label' => "Buscar",
+                'attr' => [
+                    'class' => 'btn btn-primary my-2'
+                ]
             ])
-            ->add("purchaseInvoiceDate", DateType::class)
-            ->add("totalUnits", NumberType::class, [
-                'scale' => 2,
+            ->add('clear', ButtonType::class, [
+                'label' => "Limpiar",
+                'attr' => [
+                    'class' => 'btn btn-secundary my-2'
+                ]
             ])
-            ->add("totalQuantity", NumberType::class, [
-                'scale' => 2,
-            ])
-            ->add("fileInvoice", VichFileType::class, [
-                'required' => true,
-                'allow_delete' => false,
+            ->add('back', ButtonType::class, [
+                'label' => "Volver",
+                'attr' => [
+                    'class' => 'btn btn-default my-2'
+                ]
             ])
         ;
-
-//        $builder->addEventSubscriber(AddFileInvoinceSubscriber::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -78,7 +79,7 @@ class DealInvoiceType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => DealInvoice::class
+            'data_class' => null
         ]);
     }
 }

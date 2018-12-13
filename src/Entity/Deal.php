@@ -38,7 +38,7 @@ class Deal
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\DealInvoice", inversedBy="deals", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $dealInvoice;
 

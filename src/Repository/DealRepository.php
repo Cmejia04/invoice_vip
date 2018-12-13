@@ -19,32 +19,21 @@ class DealRepository extends ServiceEntityRepository
         parent::__construct($registry, Deal::class);
     }
 
-//    /**
-//     * @return Deal[] Returns an array of Deal objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findUsedFilters($filter)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('d.dealInvoice', 'di')
+            ->innerJoin('di.dealCompany', 'dc')
+            ->innerJoin('dc.dealCompanyType', 'dct')
+            ->innerJoin('d.dealStatus', 'ds')
+            ->where('dc.name LIKE "%:keyword%" OR dct.name LIKE "%:keyword%" OR ds.name LIKE "%:keyword%"')
+            ->andWhere('dc.id = :distributor')
+            ->setParameters([
+                'keyword' => $filter['keyword'],
+                'distributor' => $filter['distributor']
+            ])
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Deal
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

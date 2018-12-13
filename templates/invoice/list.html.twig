@@ -12,26 +12,23 @@
         <h4 class="col-lg-12 col-md-12">Buscar</h4>
         <hr>
 
-        <form action="#" class="col-md-12">
+        {{ form_start(form, { 'attr': { 'class': 'col-md-12' } }) }}
             <div class="form-row">
-                <div class="col">
-                    <label for="keyword">Palabra Clave</label>
-                    <input type="text" class="form-control" placeholder="Palabra Clave" />
+                <div class="col-md-6">
+                    {{ form_label(form.keyword) }}
+                    {{ form_widget(form.keyword) }}
                 </div>
-                <div class="col">
-                    <label for="distributor">Distribuidor</label>
-                    <select name="distributor" id="distributor" class="form-control">
-                        <option value="">Seleccionar</option>
-                        <option value="1">HP Inc</option>
-                    </select>
+                <div class="col-md-6">
+                    {{ form_label(form.distributor) }}
+                    {{ form_widget(form.distributor) }}
                 </div>
             </div>
             <div class="form-group text-xl-right">
-                <button type="submit" class="btn btn-primary my-2">Buscar</button>
-                <button type="button" class="btn btn-secondary my-2">Limpiar</button>
-                <a href="{{ path('home') }}" class="btn btn-default my-2">Volver</a>
+                {{ form_row(form.search) }}
+                {{ form_row(form.clear) }}
+                {{ form_row(form.back) }}
             </div>
-        </form>
+        {{ form_end(form) }}
     </div>
 
     <div class="row">
@@ -62,10 +59,10 @@
                     <td><a href="{{ vich_uploader_asset(deal.dealInvoice, 'fileInvoice') }}" target="_blank">Ver</a></td>
                     <td>
                         <div class="form-group">
-                            <select class="from-control">
+                            <select class="from-control select-action" data-id="{{ deal.id }}">
                                 <option value="">Seleccionar</option>
-                                <option value="">Editar</option>
-                                <option value="">Eliminar</option>
+                                <option value="edit">Editar</option>
+                                <option value="delete">Eliminar</option>
                             </select>
                         </div>
                     </td>
@@ -75,4 +72,8 @@
         </table>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}
