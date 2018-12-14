@@ -24,6 +24,14 @@ body {
   background-size: cover;
 }
 
+.carousel-caption {
+  color: #000 !important;
+}
+
+.carousel-indicators {
+  color: #797795;
+}
+
 .portfolio-item {
   margin-bottom: 30px;
 }

@@ -19,32 +19,28 @@ class DealRepository extends ServiceEntityRepository
         parent::__construct($registry, Deal::class);
     }
 
-//    /**
-//     * @return Deal[] Returns an array of Deal objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findUsedFilters($filter)
     {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $query = $this->createQueryBuilder('d')
+            ->innerJoin('d.dealInvoice', 'di')
+            ->innerJoin('di.dealCompany', 'dc')
+            ->innerJoin('dc.dealCompanyType', 'dct')
+            ->innerJoin('d.dealStatus', 'ds')
+            ->where("1 = 1")
         ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Deal
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ( !empty($filter['keyword']) ) {
+            $query
+                ->andWhere('dc.name LIKE \':keyword\' OR dct.name LIKE \':keyword\' OR ds.name LIKE \':keyword\'')
+                ->setParameter('keyword', "%" . $filter['keyword'] . "%");
+        }
+
+        if ( !empty($filter['distributor']) ) {
+            $query
+                ->andWhere('dc.id = :distributor')
+                ->setParameter('distributor', $filter['distributor']);
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
 }
