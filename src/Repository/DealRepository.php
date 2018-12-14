@@ -21,19 +21,26 @@ class DealRepository extends ServiceEntityRepository
 
     public function findUsedFilters($filter)
     {
-        return $this->createQueryBuilder('d')
+        $query = $this->createQueryBuilder('d')
             ->innerJoin('d.dealInvoice', 'di')
             ->innerJoin('di.dealCompany', 'dc')
             ->innerJoin('dc.dealCompanyType', 'dct')
             ->innerJoin('d.dealStatus', 'ds')
-            ->where('dc.name LIKE "%:keyword%" OR dct.name LIKE "%:keyword%" OR ds.name LIKE "%:keyword%"')
-            ->andWhere('dc.id = :distributor')
-            ->setParameters([
-                'keyword' => $filter['keyword'],
-                'distributor' => $filter['distributor']
-            ])
-            ->getQuery()
-            ->getResult()
+            ->where("1 = 1")
         ;
+
+        if ( !empty($filter['keyword']) ) {
+            $query
+                ->andWhere('dc.name LIKE \':keyword\' OR dct.name LIKE \':keyword\' OR ds.name LIKE \':keyword\'')
+                ->setParameter('keyword', "%" . $filter['keyword'] . "%");
+        }
+
+        if ( !empty($filter['distributor']) ) {
+            $query
+                ->andWhere('dc.id = :distributor')
+                ->setParameter('distributor', $filter['distributor']);
+        }
+
+        return $query->getQuery()->getResult();
     }
 }

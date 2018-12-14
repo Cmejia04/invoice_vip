@@ -36,7 +36,6 @@ class InvoiceController extends Controller
         $data['distributor'] = (null !== $request->request->get('distributor')) ? $request->request->get('distributor') : null;
 
         $deals = $this->getDoctrine()->getRepository(Deal::class)->findUsedFilters($data);
-        dump($deals);die;
         $form = $this->createForm(FilterListType::class);
 
         return $this->render('invoice/list.html.twig', [

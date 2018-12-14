@@ -13,7 +13,7 @@
         <hr>
 
         {{ form_start(form, { 'attr': { 'class': 'col-md-12' } }) }}
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-6">
                     {{ form_label(form.keyword) }}
                     {{ form_widget(form.keyword) }}
@@ -24,9 +24,11 @@
                 </div>
             </div>
             <div class="form-group text-xl-right">
-                {{ form_row(form.search) }}
-                {{ form_row(form.clear) }}
-                {{ form_row(form.back) }}
+                <div class="row">
+                    {{ form_row(form.search) }}
+                    {{ form_row(form.clear) }}
+                    {{ form_row(form.back) }}
+                </div>
             </div>
         {{ form_end(form) }}
     </div>

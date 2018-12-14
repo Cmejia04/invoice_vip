@@ -22,6 +22,9 @@ Encore
         './assets/scss/app.scss',
         './assets/css/modern-business.css'
     ])
+    .addStyleEntry('css/signin', [
+        './assets/css/signin.css'
+    ])
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/image', to: 'image' }
     ]))

@@ -62,7 +62,7 @@ class FilterListType extends AbstractType
             ->add('clear', ButtonType::class, [
                 'label' => "Limpiar",
                 'attr' => [
-                    'class' => 'btn btn-secundary my-2'
+                    'class' => 'btn btn-secondary my-2'
                 ]
             ])
             ->add('back', ButtonType::class, [
