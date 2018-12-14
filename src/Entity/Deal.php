@@ -24,7 +24,7 @@ class Deal
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isConfirmed;
+    private $isConfirmed = true;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -34,11 +34,11 @@ class Deal
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isCloseToExpiredNotified;
+    private $isCloseToExpiredNotified = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\DealInvoice", inversedBy="deals")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\DealInvoice", inversedBy="deals", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $dealInvoice;
 

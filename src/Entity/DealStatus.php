@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DealStatus
 {
+
+     const ACTIVE = 1;
+     const INACTIVE = 2;
+     const PENDING = 3;
+     const DELETED = 4;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,5 +42,10 @@ class DealStatus
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

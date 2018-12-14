@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DealInvoiceRepository")
+ * @Vich\Uploadable
  */
 class DealInvoice
 {
@@ -52,6 +55,22 @@ class DealInvoice
      * @ORM\Column(type="integer", nullable=true)
      */
     private $totalQuantity;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="file_invoice", fileNameProperty="fileName")
+     *
+     * @var File
+     */
+    private $fileInvoice;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $fileName;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BusinessUnit")
@@ -166,6 +185,35 @@ class DealInvoice
         return $this;
     }
 
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $fileInvoice
+     */
+    public function setFileInvoice(?File $fileInvoice = null): void
+    {
+        $this->fileInvoice = $fileInvoice;
+    }
+
+    public function getFileInvoice(): ?File
+    {
+        return $this->fileInvoice;
+    }
+
+    public function setFileName(?string $fileName): void
+    {
+        $this->fileName = $fileName;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
     public function getBusinessUnit(): ?BusinessUnit
     {
         return $this->businessUnit;
@@ -220,4 +268,11 @@ class DealInvoice
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getInvoiceNumber();
+    }
+
+
 }
